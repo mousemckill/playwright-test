@@ -3,7 +3,12 @@ on:
   push:
     branches: [ main, master ]
   pull_request:
-    branches: [ main, master ]
+
+permissions:
+  checks: write
+  contents: read
+  actions: read
+
 jobs:
   test:
     timeout-minutes: 60
@@ -25,3 +30,33 @@ jobs:
         name: playwright-report
         path: playwright-report/
         retention-days: 30
+    - name: Test Report
+      uses: ctrf-io/github-test-reporter@v1
+      if: ${{ !cancelled() }}
+      with:
+        report-path: './results.xml'
+        integrations-config: |
+          {
+            "junit-to-ctrf": {
+              "enabled": true,
+              "action": "convert",
+              "options": {
+                "output": "./ctrf/ctrf-report.json",
+                "toolname": "junit-to-ctrf",
+                "useSuiteName": false,
+                "env": {
+                  "appName": "my-app"
+                }
+              }
+            }
+          }
+        github-report: true
+        summary-report: true
+        test-report: true
+        test-list-report: true
+        flaky-report: true
+        failed-report: true
+        failed-folded-report: true
+        skipped-report: true
+        suite-folded-report: true
+        suite-list-report: true
