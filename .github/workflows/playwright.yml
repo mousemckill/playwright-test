@@ -31,9 +31,17 @@ jobs:
         path: playwright-report/
         retention-days: 30
     - name: Test Report
-      uses: dorny/test-reporter@v2
+      uses: ctrf-io/github-test-reporter@v1
       if: ${{ !cancelled() }}
       with:
-        name: E2E Tests
-        path: results.json
-        reporter: mocha-json
+        report-path: './ctrf/*.json'
+        github-report: true
+        summary-report: true
+        test-report: true
+        test-list-report: true
+        flaky-report: true
+        failed-report: true
+        failed-folded-report: true
+        skipped-report: true
+        suite-folded-report: true
+        suite-list-report: true
