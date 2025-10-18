@@ -3,7 +3,12 @@ on:
   push:
     branches: [ main, master ]
   pull_request:
-    branches: [ main, master ]
+
+permissions:
+  checks: write
+  contents: read
+  actions: read
+
 jobs:
   test:
     timeout-minutes: 60
@@ -25,3 +30,10 @@ jobs:
         name: playwright-report
         path: playwright-report/
         retention-days: 30
+    - name: Test Report
+      uses: dorny/test-reporter@v2
+      if: ${{ !cancelled() }}
+      with:
+        name: E2E Tests
+        path: results.xml
+        reporter: jest-junit

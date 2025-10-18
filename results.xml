@@ -1,0 +1,35 @@
+<testsuites id="" name="" tests="2" failures="1" skipped="0" errors="0" time="30.524597">
+<testsuite name="example.spec.ts" timestamp="2025-10-18T11:44:24.789Z" hostname="chromium" tests="2" failures="1" skipped="0" time="30.95" errors="0">
+<testcase name="has title" classname="example.spec.ts" time="0.919">
+</testcase>
+<testcase name="get started link" classname="example.spec.ts" time="30.031">
+<failure message="example.spec.ts:10:5 get started link" type="FAILURE">
+<![CDATA[  [chromium] › example.spec.ts:10:5 › get started link ─────────────────────────────────────────────
+
+    Test timeout of 30000ms exceeded.
+
+    Error: locator.click: Test timeout of 30000ms exceeded.
+    Call log:
+      - waiting for getByRole('link', { name: 'Get started2222' })
+
+
+      12 |
+      13 |   // Click the get started link.
+    > 14 |   await page.getByRole('link', { name: 'Get started2222' }).click();
+         |                                                             ^
+      15 |
+      16 |   // Expects page to have a heading with the name of Installation.
+      17 |   await expect(page.getByRole('heading', { name: 'Installation' })).toBeVisible();
+        at /Users/macbook/Projects/playwright-test/tests/example.spec.ts:14:61
+
+    Error Context: ../test-results/example-get-started-link-chromium/error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|test-results/example-get-started-link-chromium/error-context.md]]
+]]>
+</system-out>
+</testcase>
+</testsuite>
+</testsuites>
