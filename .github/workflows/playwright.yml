@@ -35,5 +35,5 @@ jobs:
       if: ${{ !cancelled() }}
       with:
         name: E2E Tests
-        path: results.xml
-        reporter: jest-junit
+        path: results.json
+        reporter: mocha-json
