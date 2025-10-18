@@ -29,7 +29,8 @@ export default defineConfig({
     process.env.CI ? ['@estruyf/github-actions-reporter', <GitHubActionOptions>{
       useDetails: true,
       showError: true,
-      showArtifactsLink: true
+      showArtifactsLink: true,
+      showAnnotationsInColumn: true
     }] : ['null']
   ],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
