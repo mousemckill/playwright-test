@@ -31,7 +31,8 @@ export default defineConfig({
         useDetails: true,
         showError: true,
         showArtifactsLink: true,
-        showAnnotationsInColumn: true
+        showAnnotationsInColumn: true,
+        quiet: true
       }]
     ] as ReporterDescription[] 
     : []),
