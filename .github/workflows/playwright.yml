@@ -34,7 +34,22 @@ jobs:
       uses: ctrf-io/github-test-reporter@v1
       if: ${{ !cancelled() }}
       with:
-        report-path: './ctrf/*.json'
+        report-path: './results.xml'
+        integrations-config: |
+          {
+            "junit-to-ctrf": {
+              "enabled": true,
+              "action": "convert",
+              "options": {
+                "output": "./ctrf/ctrf-report.json",
+                "toolname": "junit-to-ctrf",
+                "useSuiteName": false,
+                "env": {
+                  "appName": "my-app"
+                }
+              }
+            }
+          }
         github-report: true
         summary-report: true
         test-report: true
