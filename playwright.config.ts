@@ -1,4 +1,5 @@
 import { defineConfig, devices } from '@playwright/test';
+import type { GitHubActionOptions } from '@estruyf/github-actions-reporter';
 
 /**
  * Read environment variables from file.
@@ -22,7 +23,15 @@ export default defineConfig({
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: process.env.CI ? 'github' : 'html',
+  reporter: [
+    // ['github'], 
+    ['html'],
+    process.env.CI ? ['@estruyf/github-actions-reporter', <GitHubActionOptions>{
+      useDetails: true,
+      showError: true,
+      showArtifactsLink: true
+    }] : ['null']
+  ],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('')`. */

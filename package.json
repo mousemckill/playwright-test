@@ -8,6 +8,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@estruyf/github-actions-reporter": "^1.10.0",
     "@playwright/test": "^1.56.1",
     "@types/node": "^24.8.1"
   }
