@@ -25,17 +25,17 @@ export default defineConfig({
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: [
     ['html'],
-    ...(process.env.CI ? [
-      ['github'], 
-      ['@estruyf/github-actions-reporter', <GitHubActionOptions>{
-        useDetails: true,
-        showError: true,
-        showArtifactsLink: true,
-        showAnnotationsInColumn: true,
-        quiet: true
-      }]
-    ] as ReporterDescription[] 
-    : []),
+    // ...(process.env.CI ? [
+    //   ['github'], 
+    //   ['@estruyf/github-actions-reporter', <GitHubActionOptions>{
+    //     useDetails: true,
+    //     showError: true,
+    //     showArtifactsLink: true,
+    //     showAnnotationsInColumn: true,
+    //     quiet: true
+    //   }]
+    // ] as ReporterDescription[] 
+    // : []),
   ],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
