@@ -1,4 +1,4 @@
-import { defineConfig, devices } from '@playwright/test';
+import { defineConfig, devices, ReporterDescription } from '@playwright/test';
 import type { GitHubActionOptions } from '@estruyf/github-actions-reporter';
 
 /**
@@ -24,14 +24,17 @@ export default defineConfig({
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: [
-    // ['github'], 
     ['html'],
-    process.env.CI ? ['@estruyf/github-actions-reporter', <GitHubActionOptions>{
-      useDetails: true,
-      showError: true,
-      showArtifactsLink: true,
-      showAnnotationsInColumn: true
-    }] : ['null']
+    ...(process.env.CI ? [
+      ['github'], 
+      ['@estruyf/github-actions-reporter', <GitHubActionOptions>{
+        useDetails: true,
+        showError: true,
+        showArtifactsLink: true,
+        showAnnotationsInColumn: true
+      }]
+    ] as ReporterDescription[] 
+    : []),
   ],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
