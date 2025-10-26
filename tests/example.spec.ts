@@ -16,3 +16,14 @@ test('get started link', async ({ page }) => {
   // Expects page to have a heading with the name of Installation.
   await expect(page.getByRole('heading', { name: 'Installation' })).toBeVisible();
 });
+
+test.fixme('fixme', {
+  tag: ['@UI', '@Report'],
+  annotation: [
+    {
+      type: 'issue',
+      description: '123'
+    }
+  ]
+}, () => {})
+test.skip('skipped', () => {})

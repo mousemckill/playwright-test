@@ -30,26 +30,14 @@ jobs:
         name: playwright-report
         path: playwright-report/
         retention-days: 30
+    - name: Convert Playwright report to CTRF
+      if: ${{ !cancelled() }}
+      run: node convert-to-ctrf.mjs results.json ctrf-report.json
     - name: Test Report
       uses: ctrf-io/github-test-reporter@v1
       if: ${{ !cancelled() }}
       with:
-        report-path: './results.xml'
-        integrations-config: |
-          {
-            "junit-to-ctrf": {
-              "enabled": true,
-              "action": "convert",
-              "options": {
-                "output": "./ctrf/ctrf-report.json",
-                "toolname": "junit-to-ctrf",
-                "useSuiteName": false,
-                "env": {
-                  "appName": "my-app"
-                }
-              }
-            }
-          }
+        report-path: './ctrf-report.json'
         github-report: true
         summary-report: true
         test-report: true
