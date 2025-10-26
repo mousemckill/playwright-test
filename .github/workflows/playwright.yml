@@ -3,7 +3,12 @@ on:
   push:
     branches: [ main, master ]
   pull_request:
-    branches: [ main, master ]
+
+permissions:
+  checks: write
+  contents: read
+  actions: read
+
 jobs:
   test:
     timeout-minutes: 60
@@ -25,3 +30,21 @@ jobs:
         name: playwright-report
         path: playwright-report/
         retention-days: 30
+    - name: Convert Playwright report to CTRF
+      if: ${{ !cancelled() }}
+      run: node convert-to-ctrf.mjs results.json ctrf-report.json
+    - name: Test Report
+      uses: ctrf-io/github-test-reporter@v1
+      if: ${{ !cancelled() }}
+      with:
+        report-path: './ctrf-report.json'
+        github-report: true
+        summary-report: true
+        test-report: true
+        test-list-report: true
+        flaky-report: true
+        failed-report: true
+        failed-folded-report: true
+        skipped-report: true
+        suite-folded-report: true
+        suite-list-report: true
