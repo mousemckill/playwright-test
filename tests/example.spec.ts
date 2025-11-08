@@ -7,12 +7,17 @@ test('has title', async ({ page }) => {
   await expect(page).toHaveTitle(/Playwright/);
 });
 
-test('get started link', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
-
-  // Click the get started link.
-  await page.getByRole('link', { name: 'Get started2222' }).click();
-
-  // Expects page to have a heading with the name of Installation.
-  await expect(page.getByRole('heading', { name: 'Installation' })).toBeVisible();
-});
+test.describe('check get started', () => {
+  test('get started link', async ({ page }) => {
+    await page.goto('https://playwright.dev/');
+  
+    test.step('Go to started', async () => {
+      await expect(page.getByRole('link', { name: 'Get started_' })).toBeVisible()
+      // Click the get started link.
+      await page.getByRole('link', { name: 'Get started' }).click();
+    })
+  
+    // Expects page to have a heading with the name of Installation.
+    await expect(page.getByRole('heading', { name: 'Installation' })).toBeVisible();
+  });
+})

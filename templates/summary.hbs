@@ -1,0 +1,39 @@
+# Test Results Summary
+
+## 📊 Test Statistics
+- 📊 **Total Tests**: {{report.total}}
+- ✅ **Passed**: {{report.passed}}
+- ❌ **Failed**: {{report.failed}}
+- ⏭️ **Skipped**: {{report.skipped}}
+- 🍂 **Flaky Tests**: {{report.flaky}}
+
+## ⏱️ Execution Details
+- ⏱️ **Duration**: {{report.duration}}
+- 🔍 **Branch**: {{#if github.head_ref}}{{github.head_ref}}{{else}}{{github.ref}}{{/if}}
+- 👤 **Triggered by**: {{github.actor}}
+
+{{#unless report.failed}}
+No failed tests in this run ✨
+{{else}}
+<table>
+  <thead>
+    <tr>
+      <th>Failed Tests</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each report.failedTests}}
+      <tr>
+        <td>
+          <details>
+            <summary>❌ {{this.name}}</summary>
+            <pre><code>{{this.message}}</code></pre>
+            <p><strong>Trace:</strong></p>
+            <pre><code>{{{this.trace}}}</code></pre>
+          </details>
+        </td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>
+{{/unless}}
